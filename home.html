@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<!-- This section specifies the HTML document type and language -->
+<style type='text/css'>
+    /* This block sets some common styles for the entire page */
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* This sets the background image and styles for the body element */
+    body {
+        background-image: url('https://img.freepik.com/premium-photo/texture-black-carbon-fiber_28943-725.jpg');
+        background-size: 850px;
+        font-family: sans-serif;
+        margin-top: 10px;
+        height: 60vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    /* Styles for table elements */
+    table {
+        border: 1px;
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 86%;
+        margin: auto;
+    }
+
+    /* Styles for table cells and headers */
+    td,
+    th {
+        border: 1px solid black !important;
+        padding: 5px;
+    }
+
+    /* Alternating row colors for better readability */
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
+    /* Header Animation */
+    h1 {
+        animation: fadeInUp 1s ease;
+    }
+
+    /* Keyframes for header animation */
+    @keyframes fadeInUp {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Button Hover Animation */
+    .btn {
+        transition: transform 0.2s ease;
+    }
+
+    /* Scale up button on hover */
+    .btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Form Input Animation on Focus */
+    input[type="text"],
+    select {
+        transition: transform 0.2s ease;
+    }
+
+    /* Scale up input fields on focus */
+    input[type="text"]:focus,
+    select:focus {
+        transform: scale(1.05);
+    }
+
+    /* Table Row Hover Effect */
+    tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    /* Button Click Animation */
+    .btn:active {
+        background-color: #007bff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Add transition to page elements */
+    .page-element {
+        transition: transform 0.3s ease;
+    }
+
+    /* Hover effect with a scale transform */
+    .page-element:hover {
+        transform: scale(1.05);
+    }
+</style>
+<body>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    
+        <title>Face Recognition Based Attendance System</title>
+    </head>
+    
+    
+    
+    <body>
+    
+        <div class='mt-3 text-center'>
+            <h1 style="width: auto;margin: auto;color : white;padding: 11px;font-size: 44px;">Face Recognition Based
+                Attendance System</h1>
+        </div>
+    
+            
+    
+        {% if mess%}
+        <p class="text-center" style="color: red;font-size: 20px;">{{ mess }}</p>
+        {% endif %}
+    
+        <div class="row text-center" style="padding: 20px;margin: 20px;">
+    
+            <div class="col"
+                style="border-radius: 20px;padding: 0px;background-color:rgb(211,211,211,0.5);margin:0px 10px 10px 10px;min-height: 400px;">
+                <h2 style="border-radius: 20px 20px 0px 0px;background-color: #12a1d0;color: white;padding: 10px;">Today's
+                    Attendance <i class="material-icons">assignment</i></h2>
+                <a style="text-decoration: none;max-width: 300px;" href="/start">
+                    <button
+                        style="font-size: 24px;font-weight: bold;border-radius: 10px;width:490px;padding: 10px;margin-top: 30px;margin-bottom: 30px;"
+                        type='submit' class='btn btn-primary'>Take Attendance <i
+                            class="material-icons">beenhere</i></button>
+                </a>
+
+        <!-- Table for displaying attendance data -->
+        <table style="background-color: white;">
+            <tr>
+                <td><b>S No</b></td>
+                <td><b>Name</b></td>
+                <td><b>ID</b></td>
+                <td><b>Class</b></td>
+                <td><b>Section</b></td>
+                <td><b>Time</b></td>
+            </tr>
+            <!-- Loop to populate attendance data -->
+            {% if l %}
+            {% for i in range(l) %}
+            <tr>
+                <td>{{ i+1 }}</td>
+                <td>{{ names[i] }}</td>
+                <td>{{ rolls[i] }}</td>
+                <td>{{ clas[i] }}</td>
+                <td>{{ section[i] }}</td>
+                <td>{{ times[i] }}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+
+    <!-- Column for adding a new user -->
+    <div class="col"
+        style="border-radius: 20px;padding: 0px;background-color:rgb(211,211,211,0.5);margin:0px 10px 10px 10px;height: 450px;">
+        <!-- Form to add a new user -->
+        <form action='/add' method="POST" enctype="multipart/form-data">
+            <!-- Header for adding a new user -->
+            <h2 style="border-radius: 20px 20px 0px 0px;background-color: #12a1d0;color: white;padding: 10px;">
+              User Interface (Add New User) <i class="material-icons">control_point_duplicate</i></h2>
+            <!-- Input fields for user information -->
+
+            <!-- Label and input for new user's name -->
+            <label style="font-size: 17px;color: rgb(255, 204, 0);"><b>Enter Student Full Name &nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+            <input type="text" id="newusername" name='newusername'
+                style="font-size: 17px;margin-top:10px;margin-bottom:10px;width: 220px" required>
+            <br>
+
+            <!-- Label and input for new user's ID -->
+            <label style="font-size: 17px;color:rgb(255, 204, 0)"><b>Enter Student Adm. No.&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+            <input type="text" id="newusereid" name='newuserid'
+                style="font-size: 17px;margin-top:10px;margin-bottom:10px;width: 220px" required>
+            <br>
+
+            <!-- Label and select for new user's class -->
+            <label style="font-size: 17px;color: rgb(255, 204, 0);"><b>Choose Student Class&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</b></label>
+            <select id="newuserclas" name="newuserclas" style="font-size: 17px;margin-top:10px;margin-bottom:10px;width: 220px;" required>
+                <option value="">Choose Your Class</option>
+                <option value="I">I</option>
+                <option value="II">II</option>
+                <option value="III">III</option>
+                <option value="IV">IV</option>
+                <option value="V">V</option>
+                <option value="VI">VI</option>
+                <option value="VII">VII</option>
+                <option value="VIII">VIII</option>
+                <option value="IX">IX</option>
+                <option value="X">X</option>
+                <option value="XI">XI</option>
+                <option value="XII">XII</option>
+                
+            </select>
+            <br>
+
+            <!-- Label and select for new user's section -->
+            <label style="font-size: 17px;color: rgb(255, 204, 0);"><b>Choose Student Section&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></label>
+            <select id="newusersec" name="newusersec" style="font-size: 17px;margin-top:10px;margin-bottom:10px;width: 220px;" required>
+                <option value="">Choose Your Section</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <!-- More options for sections... -->
+            </select>
+            <br>
+
+            <!-- Button to submit new user data -->
+            <button style="width: 235px;margin-top: 20px;font-size: 20px;border-top: 50px;" type='submit' class='btn btn-dark'>Add User</button>
+
+            <!-- Button to redirect to another page -->
+            <button id="redirectButton" style="width: 235px; margin-top: 20px; border-top: 50px; font-size: 20px;" type="submit" class="btn btn-dark">
+                Download Attendance 
+            </button>
+
+            <!-- JavaScript code to handle the button click event for redirecting to a URL -->
+            <script>
+                document.getElementById("redirectButton").addEventListener("click", function() {
+                    // Redirect to the desired URL
+                    window.location.href = "http://127.0.0.1:5500/Attendance/";
+                });
+            </script>
+
+            <!-- Button for redirecting to a URL -->
+            <button id="redirectaction" style="width: 198px; margin-top: 20px; border-top: 50px; font-size: 20px;" type="button" class="btn btn-dark">
+                Delete User
+            </button>
+
+            <!-- JavaScript code to handle the button click event for redirecting to another URL -->
+            <script>
+                document.getElementById("redirectaction").addEventListener("click", function() {
+                    // Redirect to the visitor window URL
+                    window.location.href = "/list_users";
+                });
+            </script>
+
+            <!-- Button for redirecting to another URL -->
+            <button id="redirectButton2" style="width: 235px; margin-top: 20px; border-top: 50px; font-size: 20px;" type="submit" class="btn btn-dark">
+                View Face Data 
+            </button>
+
+            <!-- JavaScript code to handle the button click event for redirecting to a different URL -->
+            <script>
+                document.getElementById("redirectButton2").addEventListener("click", function() {
+                    // Redirect to the desired URL
+                    window.location.href = "http://127.0.0.1:5500/face data";
+                });
+            </script>
+
+            <!-- Button for sending attendance on email -->
+            <button id="sendEmailButton" style="width: 235px; margin-top: 20px; border-top: 50px; font-size: 20px;" type="button" class="btn btn-dark">
+                Mail Attendance
+            </button>
+
+            <script>
+            document.getElementById("sendEmailButton").addEventListener("click", function() {
+                fetch('/send_email', {
+                    method: 'POST',
+                }).then(function(response) {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Failed to send email.');
+                    }
+                }).then(function(message) {
+                    alert(message);  // Display success message
+                }).catch(function(error) {
+                    console.error(error);  // Handle any errors
+                });
+            });
+
+            </script>
+
+            <!-- Button for generating a PDF -->
+            <button id="redirectpdf" style="width: 198px; margin-top: 20px; border-top: 50px; font-size: 20px;" type="button" class="btn btn-dark">
+                PDF
+            </button>
+            <!-- JavaScript code to handle the button click event for generating a PDF -->
+            <script>
+                document.getElementById("redirectpdf").addEventListener("click", function() {
+                    // Send a GET request to the /get_pdf route to generate the PDF
+                    fetch('/get_pdf').then(function(response) {
+                        return response.text();
+                    }).then(function(message) {
+                        // Display the message returned from the server (confirmation or error message)
+                        alert(message);
+                    }).catch(function(error) {
+                        // Handle any errors that occurred during the fetch request
+                        console.error(error);
+                    });
+                });
+            </script>
+            <!-- Display the total number of registered users -->
+            <h5 style="padding: 17px;color: rgb(196, 213, 12);"><i>Total Users in Database: {{totalreg}}</i></h5>
+        </form>
+    </div>
+</body>
+</html>

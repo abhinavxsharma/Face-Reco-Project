@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>LOGIN</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <link rel="stylesheet" href="LOGIN.css" />
+  <script src="https://secure.exportkit.com/cdn/js/ek_googlefonts.js?v=6"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 82vh;
+      margin: 0;
+      background-image: url('https://static.wixstatic.com/media/59979b_9f944cb6204f4748b55f237825f5552c~mv2.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    #content-container {
+      text-align: center;
+    }
+
+    .custom-box {
+      width: 250px;
+      background: rgba(255, 255, 255, 0.9); /* Adjust the opacity as needed */
+      padding: 20px;
+      border: 3px solid #5a3daa;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hover Effect on Form Elements */
+    input[type="text"]:hover,
+    input[type="password"]:hover,
+    select:hover {
+      background-color: #f5f5f5; /* Change to the desired hover color */
+    }
+
+    /* Transition Effect on Form Elements */
+    input[type="text"],
+    input[type="password"],
+    select {
+      transition: background-color 0.3s ease; /* Adjust the duration as needed */
+    }
+
+    /* Button Style */
+    input[type="submit"] {
+      background-color: #5a3daa; /* Change to the desired button color */
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Button Hover Effect */
+    input[type="submit"]:hover {
+      background-color: #4a2c8e; /* Change to the desired hover color */
+    }
+
+    /* Title Animation */
+    h1 {
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Image Hover Effect */
+    #page_hp_eg2039_ek1 img:hover {
+      transform: scale(1.1); /* Adjust the scale factor as needed */
+    }
+  </style>
+</head>
+<body>
+  <div id="content-container">
+    <div id="page_hp_eg2039_ek1">
+      <div class="centered-table">
+        <table>
+          <!-- Your table content here -->
+        </table>
+      </div>
+
+      <div class="custom-box">
+        <h1>  <img src="https://static.wixstatic.com/media/59979b_32eaf06f72444a319b5b0c9f19ca850f~mv2.jpg" width="75" height="75" style="vertical-align: bottom">Login Page</h1>
+        <hr style="height: 2px; border-width: 5; color: gray; background-color: rgb(174, 16, 16)">
+        <form id="login-form">
+          <label for="user-type">User Type:</label>
+          <select id="Select User" name="user-type" required>
+            <option value="Selectuser">Select User Type............</option>
+            <option value="student">Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+          <br><br>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required><br><br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required><br><br>
+          <input type="submit" value="Login">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const form = document.getElementById("login-form");
+
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const username = form.username.value;
+        const password = form.password.value;
+        const userType = form['user-type'].value;
+
+        // Check the userType and set appropriate default credentials
+        let defaultUsername, defaultPassword;
+        if (userType === "teacher") {
+          defaultUsername = "admin123";
+          defaultPassword = "admin123";
+        } else if (userType === "student") {
+          defaultUsername = "abhinav";
+          defaultPassword = "abhinav";
+        }
+
+        if (username === defaultUsername && password === defaultPassword) {
+          // Redirect to the specified IP address and port
+          window.location.href = "http://127.0.0.1:5000";
+          // window.location.href = "http://facereco:5941/";
+        } else {
+          alert("Invalid username or password. Please try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
